@@ -7,7 +7,7 @@ type Props = {
 
 const Container = styled.section`
   flex-wrap: wrap;
-  height: 100%;
+  height: calc(100% - 56px - 60px);
 `;
 
 const PublicLayout = ({ children }: Props) => {
