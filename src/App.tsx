@@ -1,12 +1,17 @@
 import React from "react";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import COLORS_PALLETE from "./constants/COLORS_PALLETE";
-import HomeComponent from "./pages/Home/Home";
 import LoginComponent from "./pages/Login/Login";
 import CurrenciesComponent from "./pages/Currencies/Currencies";
 import UpdateCurrencyComponent from "./pages/UpdateCurrency/UpdateCurrency";
+
+import pipe from "@bitty/pipe";
+import TokenProvider from "./context/useToken";
+import withProvider from "./utils/react/withProvider";
+import PrivateRoute from "./components/global/PrivateRoute/PrivateRoute";
+import Home from "./pages/Home/Home";
 
 const GlobalStyle = createGlobalStyle`
   html, body, #root {
@@ -24,11 +29,21 @@ const GlobalStyle = createGlobalStyle`
 const App = () => (
   <Router>
     <GlobalStyle />
-    <Route path="/" component={HomeComponent} exact />
-    <Route path="/login" component={LoginComponent} />
-    <Route path="/currencies" component={CurrenciesComponent} />
-    <Route path="/update-currency" component={UpdateCurrencyComponent} />
+    <Switch>
+      <Route path="/" exact>
+        <Home homeRoute="/currencies" />
+      </Route>
+      <Route path="/login" component={LoginComponent} />
+      <PrivateRoute>
+        <Route path="/currencies" component={CurrenciesComponent} />
+      </PrivateRoute>
+      <PrivateRoute>
+        <Route path="/update-currency" component={UpdateCurrencyComponent} />
+      </PrivateRoute>
+    </Switch>
   </Router>
 );
 
-export default App;
+const enhance = pipe(withProvider(TokenProvider));
+
+export default enhance(App);
