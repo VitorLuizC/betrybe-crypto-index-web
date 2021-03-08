@@ -1,5 +1,5 @@
 import constate from "constate";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { server } from "../services/axios";
 
@@ -8,7 +8,12 @@ import { server } from "../services/axios";
  * recebido no login
  */
 const [TokenProvider, useToken] = constate(() => {
-  const [token, setToken] = useState<null | string>(null);
+  const [token, setToken] = useState<undefined | null | string>();
+
+  const revokeToken = useCallback(() => {
+    localStorage.removeItem("token");
+    setToken(null);
+  }, [setToken]);
 
   useEffect(() => {
     const value = localStorage.getItem("token");
@@ -19,14 +24,18 @@ const [TokenProvider, useToken] = constate(() => {
   useEffect(() => {
     const current_token = localStorage.getItem("token");
 
-    if (!token || current_token === token) return;
+    if (!token && current_token !== token) {
+      setToken(current_token);
+    }
 
-    localStorage.setItem("token", token);
+    if (token && current_token !== token) {
+      localStorage.setItem("token", token);
+    }
 
-    server.defaults.headers.common["Authorization"] = token;
+    server.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   }, [token]);
 
-  return { token, setToken };
+  return { token, setToken, revokeToken };
 });
 
 export { useToken };
