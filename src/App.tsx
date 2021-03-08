@@ -12,6 +12,8 @@ import TokenProvider from "./context/useToken";
 import withProvider from "./utils/react/withProvider";
 import PrivateRoute from "./components/global/PrivateRoute/PrivateRoute";
 import Home from "./pages/Home/Home";
+import Footer from "./components/global/Footer/Footer";
+import Header from "./components/global/Header/Header";
 
 const GlobalStyle = createGlobalStyle`
   html, body, #root {
@@ -29,18 +31,22 @@ const GlobalStyle = createGlobalStyle`
 const App = () => (
   <Router>
     <GlobalStyle />
+    <Header />
     <Switch>
       <Route path="/" exact>
         <Home homeRoute="/currencies" />
       </Route>
-      <Route path="/login" component={LoginComponent} />
-      <PrivateRoute>
-        <Route path="/currencies" component={CurrenciesComponent} />
+      <PrivateRoute path="/update-currency">
+        <UpdateCurrencyComponent />
       </PrivateRoute>
-      <PrivateRoute>
-        <Route path="/update-currency" component={UpdateCurrencyComponent} />
+      <PrivateRoute path="/currencies">
+        <CurrenciesComponent />
       </PrivateRoute>
+      <Route path="/login">
+        <LoginComponent />
+      </Route>
     </Switch>
+    <Footer />
   </Router>
 );
 

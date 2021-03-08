@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import PublicLayout from "../../components/global/PublicLayout/PublicLayout";
 import FormControl from "react-bootstrap/FormControl";
@@ -8,6 +8,7 @@ import CalculatorIllustration from "../../components/illustrations/CalculatorIll
 
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import { server } from "../../services/axios";
 
 const Container = styled.div`
   display: flex;
@@ -25,10 +26,44 @@ const FormControlWrapper = styled.div``;
 const DisplayValue = styled.div`
   padding: 10px;
   background-color: ${COLORS_PALLETE.brighter};
+  overflow-x: auto;
 `;
+
+type Currency = {
+  rate_float: number;
+  rate: string;
+  code: string;
+  description: string;
+};
+
+type Time = {
+  updatedISO: string;
+  updated: string;
+  updateduk: string;
+};
+
+type CurrenciesListResponse = {
+  time: Time;
+  disclaimer: string;
+  bpi: Record<string, Currency>;
+};
 
 const Currencies = () => {
   const [value, setValue] = useState(0);
+
+  const [currencies, setCurrencies] = useState<[string, Currency][] | null>(
+    null
+  );
+
+  useEffect(() => {
+    server
+      .get<CurrenciesListResponse>("/api/crypto/btc")
+      .then(({ data: { bpi } }) => {
+        const currencies = Object.entries(bpi).filter(([key]) => key !== "BTC");
+
+        setCurrencies(currencies);
+      });
+  }, []);
 
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -63,40 +98,20 @@ const Currencies = () => {
           </FormControlWrapper>
         </div>
 
-        <div className="row w-100 justify-content-center">
-          <div className="col-3 text-center">
-            <FormControlWrapper className="w-100">
-              <Label htmlFor="btc">USD</Label>
-              <DisplayValue>
-                {parseFloat(`${value * 10}`).toFixed(2)}
-              </DisplayValue>
-            </FormControlWrapper>
+        {currencies !== null ? (
+          <div className="row w-100 justify-content-center">
+            {currencies.map(([key, currency]) => (
+              <div key={key} className="col-3 text-center">
+                <FormControlWrapper className="w-100">
+                  <Label htmlFor={key}>{key}</Label>
+                  <DisplayValue>
+                    {parseFloat(`${value * currency.rate_float}`).toFixed(2)}
+                  </DisplayValue>
+                </FormControlWrapper>
+              </div>
+            ))}
           </div>
-          <div className="col-3 text-center">
-            <FormControlWrapper className="w-100">
-              <Label htmlFor="btc">EUR</Label>
-              <DisplayValue>
-                {parseFloat(`${value * 3}`).toFixed(2)}
-              </DisplayValue>
-            </FormControlWrapper>
-          </div>
-          <div className="col-3 text-center">
-            <FormControlWrapper className="w-100">
-              <Label htmlFor="btc">BRL</Label>
-              <DisplayValue>
-                {parseFloat(`${value * 20}`).toFixed(2)}
-              </DisplayValue>
-            </FormControlWrapper>
-          </div>
-          <div className="col-3 text-center">
-            <FormControlWrapper className="w-100">
-              <Label htmlFor="btc">CAD</Label>
-              <DisplayValue>
-                {parseFloat(`${value * 4}`).toFixed(2)}
-              </DisplayValue>
-            </FormControlWrapper>
-          </div>
-        </div>
+        ) : null}
 
         <div className="row w-100 text-center">
           <CalculatorIllustration

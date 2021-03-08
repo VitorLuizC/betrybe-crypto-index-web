@@ -10,7 +10,7 @@ type Props = {
   onSubmit: (values: Values) => void;
 };
 
-type Values = {
+export type Values = {
   email: string;
   password: string;
 };

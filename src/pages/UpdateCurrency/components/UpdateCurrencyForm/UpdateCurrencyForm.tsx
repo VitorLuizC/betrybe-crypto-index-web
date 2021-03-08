@@ -11,7 +11,7 @@ type Props = {
   currentCurrencies?: Record<string, number>;
 };
 
-type Values = {
+export type Values = {
   currency?: string;
   newValue: number;
 };
@@ -72,7 +72,9 @@ const UpdateCurrencyForm = ({ currentCurrencies = {}, onSubmit }: Props) => (
           >
             <option value="">Selecionar opção</option>
             {Object.entries(currentCurrencies).map(([key]) => (
-              <option value={key}>{key}</option>
+              <option key={key} value={key}>
+                {key}
+              </option>
             ))}
           </FormControl>
           <Label className="mt-3">
