@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import PublicLayout from "../../components/global/PublicLayout/PublicLayout";

@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import PublicLayout from "../../components/global/PublicLayout/PublicLayout";
 import FormControl from "react-bootstrap/FormControl";
 import COLORS_PALLETE from "../../constants/COLORS_PALLETE";
-import { ChangeEvent } from "react";
 import CalculatorIllustration from "../../components/illustrations/CalculatorIllustration";
 
 import Button from "react-bootstrap/Button";

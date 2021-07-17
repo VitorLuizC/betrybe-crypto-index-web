@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Redirect, Route, RouteProps } from "react-router-dom";
 import { useToken } from "../../../context/useToken";
 

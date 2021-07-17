@@ -1,5 +1,3 @@
-import React from "react";
-
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import COLORS_PALLETE from "./constants/COLORS_PALLETE";

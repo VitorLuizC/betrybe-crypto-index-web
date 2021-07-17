@@ -1,4 +1,4 @@
-import React, { ComponentType } from "react";
+import type { ComponentType } from "react";
 
 /**
  * Função responsável por aninhar componentes Provider e
