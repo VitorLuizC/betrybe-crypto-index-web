@@ -1,5 +1,5 @@
 {
-  "name": "bitcoin-haskell-frontend",
+  "name": "@betrybe-crypto-index/web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
