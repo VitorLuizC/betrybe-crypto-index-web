@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
-import { Redirect, Route, RouteProps } from "react-router-dom";
-import { useToken } from "../../../context/useToken";
+import type { ReactNode } from 'react';
+import { Redirect, Route, RouteProps } from 'react-router-dom';
+import { useToken } from '../../../context/useToken';
 
 /**
  * Props do componente `PrivateRoute`
@@ -25,7 +25,7 @@ const PrivateRoute = ({ children, ...rest }: Props) => {
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: '/login',
               state: { from: location },
             }}
           />

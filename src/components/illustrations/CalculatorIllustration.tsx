@@ -6,18 +6,17 @@ type Props = {
 };
 
 const CalculatorIllustration = ({
-  width = "1rem",
-  height = "1rem",
-  fill = "#000000",
-  className = "",
+  width = '1rem',
+  height = '1rem',
+  fill = '#000000',
+  className = '',
 }: Props) => {
   return (
     <svg
       width={width}
       height={height}
       className={className}
-      viewBox="-81 -20 1161.35 808.97"
-    >
+      viewBox="-81 -20 1161.35 808.97">
       <defs>
         <linearGradient
           id="4f43e098-a778-42ef-b33c-7c47f8946c90"
@@ -26,8 +25,7 @@ const CalculatorIllustration = ({
           x2="940.91"
           y2="388.7"
           gradientTransform="translate(-77.03)"
-          gradientUnits="userSpaceOnUse"
-        >
+          gradientUnits="userSpaceOnUse">
           <stop offset="0" stopColor="gray" stopOpacity="0.25" />
           <stop offset="0.54" stopColor="gray" stopOpacity="0.12" />
           <stop offset="1" stopColor="gray" stopOpacity="0.1" />

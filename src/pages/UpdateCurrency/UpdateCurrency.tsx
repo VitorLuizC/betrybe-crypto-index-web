@@ -1,14 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import styled from "styled-components";
-import PublicLayout from "../../components/global/PublicLayout/PublicLayout";
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+import PublicLayout from '../../components/global/PublicLayout/PublicLayout';
 
-import Button from "react-bootstrap/Button";
+import Button from 'react-bootstrap/Button';
 import UpdateCurrencyForm, {
   Values as UpdateCurrencyFormValues,
-} from "./components/UpdateCurrencyForm/UpdateCurrencyForm";
-import { server } from "../../services/axios";
-import { useToken } from "../../context/useToken";
+} from './components/UpdateCurrencyForm/UpdateCurrencyForm';
+import { server } from '../../services/axios';
+import { useToken } from '../../context/useToken';
 
 const Container = styled.div`
   display: flex;
@@ -25,28 +25,28 @@ const UpdateCurrency = () => {
 
   const { token } = useToken();
 
-  const isLoggedIn = useMemo(() => typeof token === "string", [token]);
+  const isLoggedIn = useMemo(() => typeof token === 'string', [token]);
 
   const history = useHistory();
 
   useEffect(() => {
     if (isLoggedIn)
       server
-        .get<Record<string, number>>("/static/currencies.json")
+        .get<Record<string, number>>('/static/currencies.json')
         .then(({ data: currencies }) => {
           setCurrenciesList(currencies);
         });
   }, [history, isLoggedIn]);
 
   const handleUpdateCurrencySubmit = async (
-    values: UpdateCurrencyFormValues
+    values: UpdateCurrencyFormValues,
   ) => {
-    await server.post<{ message: string }>("/api/crypto/btc", {
+    await server.post<{ message: string }>('/api/crypto/btc', {
       currencyCode: values.currency,
       currencyValue: values.newValue,
     });
 
-    history.push("/currencies");
+    history.push('/currencies');
   };
 
   return (

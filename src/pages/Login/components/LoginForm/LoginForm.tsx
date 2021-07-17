@@ -1,9 +1,9 @@
-import { Form, Formik } from "formik";
-import Button from "react-bootstrap/Button";
-import FormControl from "react-bootstrap/FormControl";
-import styled from "styled-components";
-import { object, string } from "yup";
-import COLORS_PALLETE from "../../../../constants/COLORS_PALLETE";
+import { Form, Formik } from 'formik';
+import Button from 'react-bootstrap/Button';
+import FormControl from 'react-bootstrap/FormControl';
+import styled from 'styled-components';
+import { object, string } from 'yup';
+import COLORS_PALLETE from '../../../../constants/COLORS_PALLETE';
 
 type Props = {
   onSubmit: (values: Values) => void;
@@ -15,18 +15,18 @@ export type Values = {
 };
 
 const initialValues: Values = {
-  email: "",
-  password: "",
+  email: '',
+  password: '',
 };
 
 const errorMessages = {
   email: {
-    email_format: "Email inválido",
-    required: "O email é obrigatório",
+    email_format: 'Email inválido',
+    required: 'O email é obrigatório',
   },
   password: {
-    length: "A senha deve conter 6 carateres",
-    required: "A senha é obrigatória",
+    length: 'A senha deve conter 6 carateres',
+    required: 'A senha é obrigatória',
   },
 };
 
@@ -50,8 +50,7 @@ const LoginForm = ({ onSubmit }: Props) => (
   <Formik<Values>
     initialValues={initialValues}
     onSubmit={onSubmit}
-    validationSchema={schema}
-  >
+    validationSchema={schema}>
     {({
       handleChange,
       handleBlur,

@@ -1,5 +1,5 @@
-import { Redirect } from "react-router-dom";
-import { useToken } from "../../context/useToken";
+import { Redirect } from 'react-router-dom';
+import { useToken } from '../../context/useToken';
 
 /**
  * Props do componente `Home`

@@ -1,9 +1,9 @@
-import { Form, Formik } from "formik";
-import Button from "react-bootstrap/Button";
-import FormControl from "react-bootstrap/FormControl";
-import styled from "styled-components";
-import { object, string, number } from "yup";
-import COLORS_PALLETE from "../../../../constants/COLORS_PALLETE";
+import { Form, Formik } from 'formik';
+import Button from 'react-bootstrap/Button';
+import FormControl from 'react-bootstrap/FormControl';
+import styled from 'styled-components';
+import { object, string, number } from 'yup';
+import COLORS_PALLETE from '../../../../constants/COLORS_PALLETE';
 
 type Props = {
   onSubmit: (values: Values) => void;
@@ -21,11 +21,11 @@ const initialValues: Values = {
 
 const errorMessages = {
   currency: {
-    required: "A moeda é obrigatória",
+    required: 'A moeda é obrigatória',
   },
   newValue: {
-    required: "A valor é obrigatório",
-    min: "O valor deve ser maior que 0",
+    required: 'A valor é obrigatório',
+    min: 'O valor deve ser maior que 0',
   },
 };
 
@@ -44,8 +44,7 @@ const UpdateCurrencyForm = ({ currentCurrencies = {}, onSubmit }: Props) => (
   <Formik<Values>
     initialValues={initialValues}
     onSubmit={onSubmit}
-    validationSchema={schema}
-  >
+    validationSchema={schema}>
     {({
       handleChange,
       handleBlur,
@@ -67,8 +66,7 @@ const UpdateCurrencyForm = ({ currentCurrencies = {}, onSubmit }: Props) => (
             onBlur={handleBlur}
             onChange={handleChange}
             isInvalid={dirty && Boolean(errors.currency)}
-            value={values.currency}
-          >
+            value={values.currency}>
             <option value="">Selecionar opção</option>
             {Object.entries(currentCurrencies).map(([key]) => (
               <option key={key} value={key}>
@@ -77,7 +75,7 @@ const UpdateCurrencyForm = ({ currentCurrencies = {}, onSubmit }: Props) => (
             ))}
           </FormControl>
           <Label className="mt-3">
-            <strong>Valor atual:</strong>{" "}
+            <strong>Valor atual:</strong>{' '}
             {values.currency ? (
               <span>{currentCurrencies[values.currency]}</span>
             ) : null}

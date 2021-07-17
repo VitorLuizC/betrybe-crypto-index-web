@@ -1,13 +1,13 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
-import PublicLayout from "../../components/global/PublicLayout/PublicLayout";
-import FormControl from "react-bootstrap/FormControl";
-import COLORS_PALLETE from "../../constants/COLORS_PALLETE";
-import CalculatorIllustration from "../../components/illustrations/CalculatorIllustration";
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import PublicLayout from '../../components/global/PublicLayout/PublicLayout';
+import FormControl from 'react-bootstrap/FormControl';
+import COLORS_PALLETE from '../../constants/COLORS_PALLETE';
+import CalculatorIllustration from '../../components/illustrations/CalculatorIllustration';
 
-import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
-import { server } from "../../services/axios";
+import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
+import { server } from '../../services/axios';
 
 const Container = styled.div`
   display: flex;
@@ -51,14 +51,14 @@ const Currencies = () => {
   const [value, setValue] = useState(0);
 
   const [currencies, setCurrencies] = useState<[string, Currency][] | null>(
-    null
+    null,
   );
 
   useEffect(() => {
     server
-      .get<CurrenciesListResponse>("/api/crypto/btc")
+      .get<CurrenciesListResponse>('/api/crypto/btc')
       .then(({ data: { bpi } }) => {
-        const currencies = Object.entries(bpi).filter(([key]) => key !== "BTC");
+        const currencies = Object.entries(bpi).filter(([key]) => key !== 'BTC');
 
         setCurrencies(currencies);
       });
@@ -72,7 +72,7 @@ const Currencies = () => {
 
       if (newvalue > 0) setValue(newvalue);
     },
-    [setValue]
+    [setValue],
   );
 
   return (

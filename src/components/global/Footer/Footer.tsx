@@ -1,10 +1,10 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Tooltip from "react-bootstrap/Tooltip";
-import Overlay from "react-bootstrap/Overlay";
-import COLORS_PALLETE from "../../../constants/COLORS_PALLETE";
+import Tooltip from 'react-bootstrap/Tooltip';
+import Overlay from 'react-bootstrap/Overlay';
+import COLORS_PALLETE from '../../../constants/COLORS_PALLETE';
 
 const Container = styled.footer`
   position: absolute;
@@ -29,7 +29,7 @@ const Footer = () => {
   return (
     <Container>
       <FooterText className="container">
-        Feito com o ❤️ por{" "}
+        Feito com o ❤️ por{' '}
         <span ref={target} onMouseEnter={toggleShow} onMouseLeave={toggleShow}>
           🧰
         </span>

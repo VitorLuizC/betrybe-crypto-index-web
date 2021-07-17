@@ -1,14 +1,14 @@
-import { useCallback, useState } from "react";
-import { Redirect } from "react-router-dom";
-import styled from "styled-components";
-import PublicLayout from "../../components/global/PublicLayout/PublicLayout";
-import DigitialCurrencyIllustration from "../../components/illustrations/DigitalCurrencyIllustration";
-import COLORS_PALLETE from "../../constants/COLORS_PALLETE";
-import { useToken } from "../../context/useToken";
-import { server } from "../../services/axios";
+import { useCallback, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import styled from 'styled-components';
+import PublicLayout from '../../components/global/PublicLayout/PublicLayout';
+import DigitialCurrencyIllustration from '../../components/illustrations/DigitalCurrencyIllustration';
+import COLORS_PALLETE from '../../constants/COLORS_PALLETE';
+import { useToken } from '../../context/useToken';
+import { server } from '../../services/axios';
 import LoginForm, {
   Values as LoginFormValues,
-} from "./components/LoginForm/LoginForm";
+} from './components/LoginForm/LoginForm';
 
 const Container = styled.div`
   display: flex;
@@ -29,7 +29,7 @@ const IllustrationWrapper = styled.div`
 const FormLoginWrapper = styled.section`
   padding: 15px 25px;
   margin: 10px;
-  background-color: ${COLORS_PALLETE.brighter ?? ""};
+  background-color: ${COLORS_PALLETE.brighter ?? ''};
   min-height: 500px;
   display: flex;
   align-items: center;
@@ -66,9 +66,9 @@ const Login = () => {
         const {
           data: { token: receivedToken },
         } = await server.post<LoginResponse>(
-          "/api/login",
+          '/api/login',
           { email, password },
-          {}
+          {},
         );
 
         setToken(receivedToken);
@@ -80,7 +80,7 @@ const Login = () => {
         }
       }
     },
-    [setToken]
+    [setToken],
   );
 
   return token === null ? (
